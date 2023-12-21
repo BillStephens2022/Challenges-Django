@@ -18,24 +18,13 @@ monthly_challenges = {
     "december": "Learn React Native for at least 20 minutes every day!"
 }
 
+
 def index(request):
-    list_items = ""
+    
     months = list(monthly_challenges.keys())
 
-    for month in months:
-        capitalized_month = month.capitalize();
-        month_path = reverse("month-challenge", args=[month])
-        list_items += f"<li><a href='{month_path}'>{capitalized_month}</a></li>"
+    return render(request, "challenges/index.html", {"months" : months})
 
-    response_data = f"""
-    <div>
-        <h1>Challenges Page</h1>
-        <ul>
-          {list_items}
-        </ul>
-    </div>
-    """
-    return HttpResponse(response_data)
 
 def monthly_challenge_by_number(request, month):
     # converts the keys from the monthly_challenges dictionary into a list (of months)
@@ -43,16 +32,17 @@ def monthly_challenge_by_number(request, month):
 
     if month > len(months):
         return HttpResponseNotFound("Invalid month!")
-    
+
     redirect_month = months[month - 1]
-    redirect_path = reverse("month-challenge", args=[redirect_month]) # /challenges/january
+    # /challenges/january
+    redirect_path = reverse("month-challenge", args=[redirect_month])
     return HttpResponseRedirect(redirect_path)
 
 
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-       
-        return render(request, "challenges/challenge.html", {"text": challenge_text, "month_name": month.capitalize()})
+
+        return render(request, "challenges/challenge.html", {"text": challenge_text, "month_name": month})
     except:
         return HttpResponseNotFound("This month is not supported!")
