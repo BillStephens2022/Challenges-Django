@@ -15,7 +15,7 @@ monthly_challenges = {
     "september": "Learn C# for at least 20 minutes every day!",
     "october": "Learn a new fact every day!",
     "november": "Eat no sweets/candy for the entire month!",
-    "december": "Learn React Native for at least 20 minutes every day!"
+    "december": None,
 }
 
 
