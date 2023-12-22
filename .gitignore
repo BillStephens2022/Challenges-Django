@@ -19,7 +19,7 @@ settings.py
 local_settings.py
 
 # Static Files and Media (if you use a CDN or don't want to version control them):
-static/
+
 media/
 
 # Dependency and Cache Directories:
